@@ -221,618 +221,618 @@ public class DbInitializer
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 26,
-                    EndCityId = 9,
+                    City1Id = 26,
+                    City2Id = 9,
                     TransportType = "car",
-                    Weight = 3
+                    Distance = 3
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 9,
-                    EndCityId = 27,
+                    City1Id = 9,
+                    City2Id = 27,
                     TransportType = "car",
-                    Weight = 6
+                    Distance = 6
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 27,
-                    EndCityId = 19,
+                    City1Id = 27,
+                    City2Id = 19,
                     TransportType = "car",
-                    Weight = 4
+                    Distance = 4
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 27,
-                    EndCityId = 10,
+                    City1Id = 27,
+                    City2Id = 10,
                     TransportType = "car",
-                    Weight = 3
+                    Distance = 3
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 10,
-                    EndCityId = 11,
+                    City1Id = 10,
+                    City2Id = 11,
                     TransportType = "car",
-                    Weight = 4
+                    Distance = 4
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 11,
-                    EndCityId = 33,
+                    City1Id = 11,
+                    City2Id = 33,
                     TransportType = "car",
-                    Weight = 3
+                    Distance = 3
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 10,
-                    EndCityId = 30,
+                    City1Id = 10,
+                    City2Id = 30,
                     TransportType = "car",
-                    Weight = 4
+                    Distance = 4
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 10,
-                    EndCityId = 36,
+                    City1Id = 10,
+                    City2Id = 36,
                     TransportType = "car",
-                    Weight = 7
+                    Distance = 7
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 10,
-                    EndCityId = 37,
+                    City1Id = 10,
+                    City2Id = 37,
                     TransportType = "car",
-                    Weight = 2
+                    Distance = 2
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 10,
-                    EndCityId = 28,
+                    City1Id = 10,
+                    City2Id = 28,
                     TransportType = "car",
-                    Weight = 8
+                    Distance = 8
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 28,
-                    EndCityId = 2,
+                    City1Id = 28,
+                    City2Id = 2,
                     TransportType = "car",
-                    Weight = 5
+                    Distance = 5
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 28,
-                    EndCityId = 1,
+                    City1Id = 28,
+                    City2Id = 1,
                     TransportType = "car",
-                    Weight = 5
+                    Distance = 5
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 1,
-                    EndCityId = 26,
+                    City1Id = 1,
+                    City2Id = 26,
                     TransportType = "car",
-                    Weight = 5
+                    Distance = 5
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 2,
-                    EndCityId = 21,
+                    City1Id = 2,
+                    City2Id = 21,
                     TransportType = "car",
-                    Weight = 8
+                    Distance = 8
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 21,
-                    EndCityId = 15,
+                    City1Id = 21,
+                    City2Id = 15,
                     TransportType = "car",
-                    Weight = 4
+                    Distance = 4
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 15,
-                    EndCityId = 3,
+                    City1Id = 15,
+                    City2Id = 3,
                     TransportType = "car",
-                    Weight = 5
+                    Distance = 5
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 15,
-                    EndCityId = 29,
+                    City1Id = 15,
+                    City2Id = 29,
                     TransportType = "car",
-                    Weight = 5
+                    Distance = 5
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 29,
-                    EndCityId = 36,
+                    City1Id = 29,
+                    City2Id = 36,
                     TransportType = "car",
-                    Weight = 5
+                    Distance = 5
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 30,
-                    EndCityId = 36,
+                    City1Id = 30,
+                    City2Id = 36,
                     TransportType = "car",
-                    Weight = 7
+                    Distance = 7
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 30,
-                    EndCityId = 31,
+                    City1Id = 30,
+                    City2Id = 31,
                     TransportType = "car",
-                    Weight = 6
+                    Distance = 6
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 31,
-                    EndCityId = 36,
+                    City1Id = 31,
+                    City2Id = 36,
                     TransportType = "car",
-                    Weight = 5
+                    Distance = 5
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 31,
-                    EndCityId = 32,
+                    City1Id = 31,
+                    City2Id = 32,
                     TransportType = "car",
-                    Weight = 3
+                    Distance = 3
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 32,
-                    EndCityId = 16,
+                    City1Id = 32,
+                    City2Id = 16,
                     TransportType = "car",
-                    Weight = 4
+                    Distance = 4
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 16,
-                    EndCityId = 17,
+                    City1Id = 16,
+                    City2Id = 17,
                     TransportType = "car",
-                    Weight = 4
+                    Distance = 4
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 17,
-                    EndCityId = 37,
+                    City1Id = 17,
+                    City2Id = 37,
                     TransportType = "car",
-                    Weight = 2
+                    Distance = 2
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 17,
-                    EndCityId = 33,
+                    City1Id = 17,
+                    City2Id = 33,
                     TransportType = "car",
-                    Weight = 3
+                    Distance = 3
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 33,
-                    EndCityId = 14,
+                    City1Id = 33,
+                    City2Id = 14,
                     TransportType = "car",
-                    Weight = 3
+                    Distance = 3
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 32,
-                    EndCityId = 24,
+                    City1Id = 32,
+                    City2Id = 24,
                     TransportType = "car",
-                    Weight = 10
+                    Distance = 10
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 17,
-                    EndCityId = 24,
+                    City1Id = 17,
+                    City2Id = 24,
                     TransportType = "car",
-                    Weight = 6
+                    Distance = 6
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 34,
-                    EndCityId = 24,
+                    City1Id = 34,
+                    City2Id = 24,
                     TransportType = "car",
-                    Weight = 3
+                    Distance = 3
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 34,
-                    EndCityId = 14,
+                    City1Id = 34,
+                    City2Id = 14,
                     TransportType = "car",
-                    Weight = 6
+                    Distance = 6
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 24,
-                    EndCityId = 35,
+                    City1Id = 24,
+                    City2Id = 35,
                     TransportType = "car",
-                    Weight = 5
+                    Distance = 5
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 35,
-                    EndCityId = 4,
+                    City1Id = 35,
+                    City2Id = 4,
                     TransportType = "car",
-                    Weight = 4
+                    Distance = 4
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 35,
-                    EndCityId = 8,
+                    City1Id = 35,
+                    City2Id = 8,
                     TransportType = "car",
-                    Weight = 3
+                    Distance = 3
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 8,
-                    EndCityId = 24,
+                    City1Id = 8,
+                    City2Id = 24,
                     TransportType = "car",
-                    Weight = 4
+                    Distance = 4
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 4,
-                    EndCityId = 7,
+                    City1Id = 4,
+                    City2Id = 7,
                     TransportType = "car",
-                    Weight = 4
+                    Distance = 4
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 1,
-                    EndCityId = 20,
+                    City1Id = 1,
+                    City2Id = 20,
                     TransportType = "boat",
-                    Weight = 3
+                    Distance = 3
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 20,
-                    EndCityId = 21,
+                    City1Id = 20,
+                    City2Id = 21,
                     TransportType = "boat",
-                    Weight = 5
+                    Distance = 5
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 21,
-                    EndCityId = 15,
+                    City1Id = 21,
+                    City2Id = 15,
                     TransportType = "boat",
-                    Weight = 3
+                    Distance = 3
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 21,
-                    EndCityId = 6,
+                    City1Id = 21,
+                    City2Id = 6,
                     TransportType = "boat",
-                    Weight = 10
+                    Distance = 10
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 15,
-                    EndCityId = 3,
+                    City1Id = 15,
+                    City2Id = 3,
                     TransportType = "boat",
-                    Weight = 4
+                    Distance = 4
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 3,
-                    EndCityId = 22,
+                    City1Id = 3,
+                    City2Id = 22,
                     TransportType = "boat",
-                    Weight = 4
+                    Distance = 4
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 3,
-                    EndCityId = 4,
+                    City1Id = 3,
+                    City2Id = 4,
                     TransportType = "boat",
-                    Weight = 11
+                    Distance = 11
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 22,
-                    EndCityId = 4,
+                    City1Id = 22,
+                    City2Id = 4,
                     TransportType = "boat",
-                    Weight = 9
+                    Distance = 9
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 6,
-                    EndCityId = 4,
+                    City1Id = 6,
+                    City2Id = 4,
                     TransportType = "boat",
-                    Weight = 10
+                    Distance = 10
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 6,
-                    EndCityId = 7,
+                    City1Id = 6,
+                    City2Id = 7,
                     TransportType = "boat",
-                    Weight = 9
+                    Distance = 9
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 7,
-                    EndCityId = 18,
+                    City1Id = 7,
+                    City2Id = 18,
                     TransportType = "boat",
-                    Weight = 8
+                    Distance = 8
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 18,
-                    EndCityId = 24,
+                    City1Id = 18,
+                    City2Id = 24,
                     TransportType = "boat",
-                    Weight = 3
+                    Distance = 3
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 24,
-                    EndCityId = 14,
+                    City1Id = 24,
+                    City2Id = 14,
                     TransportType = "boat",
-                    Weight = 8
+                    Distance = 8
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 14,
-                    EndCityId = 13,
+                    City1Id = 14,
+                    City2Id = 13,
                     TransportType = "boat",
-                    Weight = 8
+                    Distance = 8
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 14,
-                    EndCityId = 25,
+                    City1Id = 14,
+                    City2Id = 25,
                     TransportType = "boat",
-                    Weight = 4
+                    Distance = 4
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 11,
-                    EndCityId = 19,
+                    City1Id = 11,
+                    City2Id = 19,
                     TransportType = "boat",
-                    Weight = 4
+                    Distance = 4
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 19,
-                    EndCityId = 26,
+                    City1Id = 19,
+                    City2Id = 26,
                     TransportType = "boat",
-                    Weight = 5
+                    Distance = 5
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 26,
-                    EndCityId = 1,
+                    City1Id = 26,
+                    City2Id = 1,
                     TransportType = "boat",
-                    Weight = 3
+                    Distance = 3
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 1,
-                    EndCityId = 2,
+                    City1Id = 1,
+                    City2Id = 2,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 1,
-                    EndCityId = 9,
+                    City1Id = 1,
+                    City2Id = 9,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 2,
-                    EndCityId = 15,
+                    City1Id = 2,
+                    City2Id = 15,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 2,
-                    EndCityId = 3,
+                    City1Id = 2,
+                    City2Id = 3,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 3,
-                    EndCityId = 12,
+                    City1Id = 3,
+                    City2Id = 12,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 3,
-                    EndCityId = 4,
+                    City1Id = 3,
+                    City2Id = 4,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 3,
-                    EndCityId = 9,
+                    City1Id = 3,
+                    City2Id = 9,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 4,
-                    EndCityId = 7,
+                    City1Id = 4,
+                    City2Id = 7,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 5,
-                    EndCityId = 6,
+                    City1Id = 5,
+                    City2Id = 6,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 6,
-                    EndCityId = 7,
+                    City1Id = 6,
+                    City2Id = 7,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 7,
-                    EndCityId = 16,
+                    City1Id = 7,
+                    City2Id = 16,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 7,
-                    EndCityId = 8,
+                    City1Id = 7,
+                    City2Id = 8,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 8,
-                    EndCityId = 17,
+                    City1Id = 8,
+                    City2Id = 17,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 7,
-                    EndCityId = 18,
+                    City1Id = 7,
+                    City2Id = 18,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 7,
-                    EndCityId = 13,
+                    City1Id = 7,
+                    City2Id = 13,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 9,
-                    EndCityId = 10,
+                    City1Id = 9,
+                    City2Id = 10,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 10,
-                    EndCityId = 16,
+                    City1Id = 10,
+                    City2Id = 16,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 10,
-                    EndCityId = 11,
+                    City1Id = 10,
+                    City2Id = 11,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 11,
-                    EndCityId = 19,
+                    City1Id = 11,
+                    City2Id = 19,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 11,
-                    EndCityId = 17,
+                    City1Id = 11,
+                    City2Id = 17,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 12,
-                    EndCityId = 4,
+                    City1Id = 12,
+                    City2Id = 4,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 13,
-                    EndCityId = 14,
+                    City1Id = 13,
+                    City2Id = 14,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 },
                 new()
                 {
                     RouteId = rnd.Next(1, 9999999),
-                    StartCityId = 14,
-                    EndCityId = 17,
+                    City1Id = 14,
+                    City2Id = 17,
                     TransportType = "plane",
-                    Weight = 1
+                    Distance = 1
                 }
             });
 
