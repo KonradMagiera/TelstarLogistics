@@ -21,7 +21,7 @@ namespace TelstarLogistics.Controllers.Api
         {
             //var cities = dbContext.Cities.ToList();
             List<City> cities = dbContext.Cities.ToList();
-            return Ok(cities.Count);
+            return Ok(cities);
         }
 
         [HttpPost]
