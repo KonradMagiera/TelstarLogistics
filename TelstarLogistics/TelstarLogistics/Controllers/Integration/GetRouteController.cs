@@ -31,12 +31,19 @@ namespace TelstarLogistics.Controllers.Integration
                 return Unauthorized();
             }
             var correlationIDHeader = correlationID;
+
+            if (request.Weight == 0 || (request.Weight != null && request.Weight > 40))
+            {
+                return BadRequest("Weight cannot be null, 0 or over 40 kg");
+            }
      
-            Console.WriteLine(123);
 
             // fetch database info based on parameters
             // process based on algo
             // map into IntegrationResponse
+
+            // calculateAndFetchRoutes(recommended = true)
+            // for each route calculate price and time it takes
 
             return Ok(new IntegrationResponse(0.00, 01, correlationID));
         }

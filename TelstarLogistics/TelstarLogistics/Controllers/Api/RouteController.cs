@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TelstarLogistics.Data;
 using TelstarLogistics.Models;
 using TelstarLogistics.Models.ApiModel;
 
@@ -10,21 +12,32 @@ namespace TelstarLogistics.Controllers.Api
     [ApiController]
     public class RouteController : ControllerBase
     {
+        TelstarLogisticsContext dbContext = new TelstarLogisticsContext();
+
         // GET: api/<ValuesController>
         [HttpGet]
         [Route("GetCities")]
         public async Task<ActionResult> GetCities()
         {
-            return Ok(new string[] { "value1", "value2" });
+            //var cities = dbContext.Cities.ToList();
+            List<City> cities = dbContext.Cities.ToList();
+            return Ok(cities.Count);
         }
 
         [HttpPost]
         [Route("GetRoutes")]
         public async Task<ActionResult> GetRoutes([FromBody] GetRoutesRequest request)
         {
-            //exampleGetRoutes(from, type, weight, height, width, depth, recommended);
+            // processRoutes(from, to)
+            // for each route list calculate
+                // fetch time and price from competitors based on route id
+                // telstarPrice, oceanicPrice, indiaPrice
+                // telstarDuration, oceanicDuration, indiaPrice
+            // filter best, fastest and cheapest routes
+                // check if request has recommended = true and if one of the route lists is only composed of car routes
+                
 
-            //response: Provides list of routes, one for each of types (best, Cheapest, Shortest) 
+            // response: Provides list of routes, one for each of types (best, Cheapest, Shortest) 
             return Ok(new string[] { "value1", "value2" });
         }
 
@@ -32,6 +45,7 @@ namespace TelstarLogistics.Controllers.Api
         [Route("ConfirmBooking")]
         public async Task<ActionResult> ConfirmBooking([FromBody] ConfirmBookingRequest request)
         {
+           // save booking
 
             //response: Booking id that the employee needs to give the customer
             return Ok(new string[] { "value1", "value2" });
@@ -48,13 +62,13 @@ namespace TelstarLogistics.Controllers.Api
         }
 
 
-        //[HttpPost]
-        //[Route("Logout")]
-        //public async Task<ActionResult> Logout([FromBody] string token)
-        //{
-        //    // flush token
+        [HttpPost]
+        [Route("Logout")]
+        public async Task<ActionResult> Logout([FromBody] LogoutRequest request)
+        {
+            // flush token
 
-        //    return Ok(new string[] { "value1", "value2" });
-        //}
+            return Ok(new string[] { "value1", "value2" });
+        }
     }
 }
