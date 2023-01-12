@@ -19,7 +19,6 @@ namespace TelstarLogistics.Controllers.Api
         [Route("GetCities")]
         public async Task<ActionResult> GetCities()
         {
-            //var cities = dbContext.Cities.ToList();
             List<City> cities = dbContext.Cities.ToList();
             return Ok(cities);
         }
