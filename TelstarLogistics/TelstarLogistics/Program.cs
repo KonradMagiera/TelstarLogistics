@@ -47,4 +47,8 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
+
+// populate db work only locally (last update 23:10)
+DbInitializer.Seed(app);
+
 app.Run();
