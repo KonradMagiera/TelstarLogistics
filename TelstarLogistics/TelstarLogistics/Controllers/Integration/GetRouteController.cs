@@ -16,7 +16,7 @@ namespace TelstarLogistics.Controllers.Integration
 {
     [Route("api")]
     [ApiController]
-    public class IntegrationRouteController : ControllerBase
+    public class GetRouteController : ControllerBase
     {
         [HttpPost]
         [Route("GetRoute")]

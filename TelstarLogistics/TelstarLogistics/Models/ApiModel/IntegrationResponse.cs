@@ -1,4 +1,4 @@
-﻿namespace TelstarLogistics.Models
+﻿namespace TelstarLogistics.Models.ApiModel
 {
     public class IntegrationResponse
     {
