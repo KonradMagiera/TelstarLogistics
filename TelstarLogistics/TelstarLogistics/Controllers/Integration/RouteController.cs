@@ -14,17 +14,10 @@ using TelstarLogistics.Models.ApiModel;
 
 namespace TelstarLogistics.Controllers.Integration
 {
-    // [Route("api/[controller]")]
     [Route("api")]
     [ApiController]
     public class RouteController : ControllerBase
     {
-        //TelstarRepository telstarRepository = new TelstarRepository();
-        //MyDbContext dbContext;
-
-        // header: correlationID, collaborationID
-        // parameters: from, to, type, arrivalTime, currency, weight, height, width, depth, recommended
-        // GET: api/<APIController>
         [HttpGet]
         [Route("GetRoute")]
         [ProducesResponseType(StatusCodes.Status200OK)]
