@@ -7,5 +7,3 @@ namespace TelstarLogistics.Models
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }
-
-//Scaffold - DbContext "Server=.\SQLExpress;Database=TelstarDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer - OutputDir Models

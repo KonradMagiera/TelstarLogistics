@@ -1,7 +1,74 @@
-﻿namespace TelstarLogistics.Services.RoutePlanning;
+﻿using TelstarLogistics.Data;
+using TelstarLogistics.Models;
+using Route = TelstarLogistics.Models.Route;
+
+namespace TelstarLogistics.Services.RoutePlanning;
 
 public class Dijkstra
 {
+    private Dictionary<int,int> cityIdToGraphIdx;
+    private int[,] graph;
+    private List<City> cities;
+
+
+    //public string TEST(string from, string to)
+    //{
+    //    //var search = new Dijkstra();
+    //    //var distance = search.GetRoute(from.ToLower(), to.ToLower(), out var path);
+
+    //    //string output = ($"distance:{distance} \n");
+    //    //foreach (var city in path)
+    //    //{
+    //    //    output += ($"{city} -> ");
+    //    //}
+
+    //    //return output;
+    //}
+
+
+    public int GetRoute(string? from, string? to, bool reccommended, out List<string> path)
+    {
+        graph = CreateGraph(reccommended);
+        var fromCity = cities.FirstOrDefault(city => city.Name == from);
+        var toCity = cities.FirstOrDefault(city => city.Name == to);
+        if (cityIdToGraphIdx.TryGetValue(fromCity.CityId,out int fromIdx) && cityIdToGraphIdx.TryGetValue(toCity.CityId, out int toIdx))
+        {
+            var distances = ComputePaths(graph, fromIdx, out var parents);
+            path = GetPath(toIdx, parents).Select(id => cities[id].Name).ToList();
+            return distances[toIdx];
+        }
+
+        path = new List<string>() { "no" };
+        return -1;
+    }
+
+
+
+    private int[,] CreateGraph(bool recommended)
+    {
+        var context = new TelstarLogisticsContext();
+
+        cities = context.Cities.ToList();
+        cityIdToGraphIdx = cities.ToDictionary(city => city.CityId, city => cities.IndexOf(city));
+
+        var graph = new int[cities.Count, cities.Count];
+
+        var routes = recommended ? context.Routes.Where(route => route.TransportType == "car").ToList() : context.Routes.ToList();
+
+        for (int i = 0; i < routes.Count; i++)
+        {
+            var route = routes[i];
+
+            var city1 = cityIdToGraphIdx[route.City1Id];
+            var city2 = cityIdToGraphIdx[route.City2Id];
+
+            graph[city1, city2] = route.Distance;
+            graph[city2, city2] = route.Distance;
+        }
+
+        return graph;
+    }
+
     public static int[] ComputePaths(int[,] graph, int sourceNode, out int[] parent)
     {
         int n = graph.GetLength(0);
