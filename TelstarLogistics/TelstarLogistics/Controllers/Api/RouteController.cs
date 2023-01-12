@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TelstarLogistics.Data;
 using TelstarLogistics.Models;
 using TelstarLogistics.Models.ApiModel;
 
@@ -10,12 +12,16 @@ namespace TelstarLogistics.Controllers.Api
     [ApiController]
     public class RouteController : ControllerBase
     {
+        TelstarLogisticsContext dbContext = new TelstarLogisticsContext();
+
         // GET: api/<ValuesController>
         [HttpGet]
         [Route("GetCities")]
         public async Task<ActionResult> GetCities()
         {
-            return Ok(new string[] { "value1", "value2" });
+            //var cities = dbContext.Cities.ToList();
+            List<City> cities = dbContext.Cities.ToList();
+            return Ok(cities.Count);
         }
 
         [HttpPost]
