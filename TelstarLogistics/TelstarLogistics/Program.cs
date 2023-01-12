@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TelstarLogistics.Data;
+using TelstarLogistics.Models.ApiModel;
+using TelstarLogistics.Controllers.Integration;
 
 var builder = WebApplication.CreateBuilder(args);
 
