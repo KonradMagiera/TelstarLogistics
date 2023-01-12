@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TelstarLogistics.Data;
 using TelstarLogistics.Models.ApiModel;
 using TelstarLogistics.Controllers.Integration;
+using TelstarLogistics.Services.RoutePlanning;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,7 @@ else
     app.UseHsts();
 }
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -44,6 +46,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
 
 // populate db work only locally (last update 23:10)
 DbInitializer.Seed(app);
