@@ -48,13 +48,13 @@ namespace TelstarLogistics.Controllers.Api
         }
 
 
-        //[HttpPost]
-        //[Route("Logout")]
-        //public async Task<ActionResult> Logout([FromBody] string token)
-        //{
-        //    // flush token
+        [HttpPost]
+        [Route("Logout")]
+        public async Task<ActionResult> Logout([FromBody] LogoutRequest request)
+        {
+            // flush token
 
-        //    return Ok(new string[] { "value1", "value2" });
-        //}
+            return Ok(new string[] { "value1", "value2" });
+        }
     }
 }
