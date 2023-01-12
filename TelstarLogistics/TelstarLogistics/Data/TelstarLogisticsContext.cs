@@ -35,9 +35,9 @@ namespace TelstarLogistics.Data
         {
             modelBuilder.Entity<Booking>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("Booking");
+
+                entity.Property(e => e.BookingId).ValueGeneratedNever();
 
                 entity.Property(e => e.CargoCenterLocations).HasColumnType("text");
 
@@ -60,18 +60,18 @@ namespace TelstarLogistics.Data
 
             modelBuilder.Entity<City>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("City");
+
+                entity.Property(e => e.CityId).ValueGeneratedNever();
 
                 entity.Property(e => e.Name).HasColumnType("text");
             });
 
             modelBuilder.Entity<Models.Route>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("Route");
+
+                entity.Property(e => e.RouteId).ValueGeneratedNever();
 
                 entity.Property(e => e.Cost).HasColumnType("decimal(18, 0)");
 
@@ -82,9 +82,9 @@ namespace TelstarLogistics.Data
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("User");
+
+                entity.Property(e => e.UserId).ValueGeneratedNever();
 
                 entity.Property(e => e.FirstName).HasColumnType("text");
 

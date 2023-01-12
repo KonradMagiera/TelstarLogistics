@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TelstarLogistics.Data;
 
@@ -11,9 +12,10 @@ using TelstarLogistics.Data;
 namespace TelstarLogistics.Migrations
 {
     [DbContext(typeof(TelstarLogisticsContext))]
-    partial class TelstarLogisticsContextModelSnapshot : ModelSnapshot
+    [Migration("20230112195003_AddPrimaryKey")]
+    partial class AddPrimaryKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,9 +28,6 @@ namespace TelstarLogistics.Migrations
                 {
                     b.Property<int>("BookingId")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("BookingRevenue")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("CargoCenterLocations")
                         .IsRequired()

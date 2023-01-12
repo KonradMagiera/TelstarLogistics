@@ -16,6 +16,7 @@ namespace TelstarLogistics.Models
         public decimal Width { get; set; }
         public DateTime Handover { get; set; }
         public bool Recommended { get; set; }
+        public decimal BookingRevenue { get; set; }
         public string CargoCenterLocations { get; set; } = null!;
         public int UserId { get; set; }
     }
