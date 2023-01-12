@@ -38,7 +38,7 @@ namespace RouteplannerTests
             int destinationNode = 1;
 
             int[] distances = TelstarLogistics.Services.RoutePlanning.Dijkstra.ComputePaths(graph, sourceNode, out var parents);
-            var path = TelstarLogistics.Services.RoutePlanning.Dijkstra.GetPath(destinationNode, parents);
+            List<int> path = TelstarLogistics.Services.RoutePlanning.Dijkstra.GetPath(destinationNode, parents);
             Assert.IsTrue(path[0] == 0 && path[1] == 2 && path[2] == 1);
         }
     }
