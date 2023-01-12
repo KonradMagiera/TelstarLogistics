@@ -1,17 +1,13 @@
-﻿using System.Reflection.Metadata.Ecma335;
-
-namespace TelstarLogistics.Services.RoutePlanning;
+﻿namespace TelstarLogistics.Services.RoutePlanning;
 
 public class Dijkstra
 {
     public static int[] ComputePaths(int[,] graph, int sourceNode, out int[] parent)
     {
-
         int n = graph.GetLength(0);
         int[] distance = new int[n];
         bool[] visited = new bool[n];
         parent = new int[n];
-
 
         for (int i = 0; i < n; i++)
         {
@@ -20,13 +16,10 @@ public class Dijkstra
         distance[sourceNode] = 0;
         parent[sourceNode] = -1;
 
-
         for (int i = 0; i < n - 1; i++)
         {
             int minDistanceNode = MinimumDistanceNode(distance, visited);
             visited[minDistanceNode] = true;
-
-
 
             for (int j = 0; j < n; j++)
             {
@@ -40,13 +33,10 @@ public class Dijkstra
         return distance;
     }
 
-
-
     static int MinimumDistanceNode(int[] distance, bool[] visited)
     {
         int min = int.MaxValue;
         int minIndex = -1;
-
 
         for (int i = 0; i < distance.Length; i++)
         {
@@ -61,7 +51,7 @@ public class Dijkstra
 
     public static List<int> GetPath(int endVertex, int[] parents)
     {
-        var path = RetracePath(endVertex, parents);
+        List<int> path = RetracePath(endVertex, parents);
         path.Reverse();
         return path;
     }

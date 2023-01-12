@@ -1,7 +1,3 @@
-
-
-using Humanizer;
-
 namespace RouteplannerTests
 {
     [TestClass]
@@ -22,11 +18,8 @@ namespace RouteplannerTests
             int sourceNode = 0;
             int destinationNode = 1;
 
-
-
             int[] distances = TelstarLogistics.Services.RoutePlanning.Dijkstra.ComputePaths(graph, sourceNode, out var parents);
-
-            Assert.AreEqual(4,distances[destinationNode]);
+            Assert.AreEqual(4, distances[destinationNode]);
         }
 
         [TestMethod]
@@ -44,14 +37,9 @@ namespace RouteplannerTests
             int sourceNode = 0;
             int destinationNode = 1;
 
-
-
             int[] distances = TelstarLogistics.Services.RoutePlanning.Dijkstra.ComputePaths(graph, sourceNode, out var parents);
             var path = TelstarLogistics.Services.RoutePlanning.Dijkstra.GetPath(destinationNode, parents);
             Assert.IsTrue(path[0] == 0 && path[1] == 2 && path[2] == 1);
         }
     }
-
-
-
 }
