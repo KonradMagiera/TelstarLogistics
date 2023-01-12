@@ -28,25 +28,24 @@ namespace TelstarLogistics.Controllers.Api
             return Ok(new string[] { "value1", "value2" });
         }
 
-        //[HttpPost]
-        //[Route("ConfirmBooking")]
-        //public async Task<ActionResult> ConfirmBooking([FromBody] string name, [FromBody] string phone, [FromBody] string email,
-        //[FromBody] float routeId)
-        //{
+        [HttpPost]
+        [Route("ConfirmBooking")]
+        public async Task<ActionResult> ConfirmBooking([FromBody] ConfirmBookingRequest request)
+        {
 
-        //    //response: Booking id that the employee needs to give the customer
-        //    return Ok(new string[] { "value1", "value2" });
-        //}
+            //response: Booking id that the employee needs to give the customer
+            return Ok(new string[] { "value1", "value2" });
+        }
 
 
-        //[HttpPost]
-        //[Route("Login")]
-        //public async Task<ActionResult> Login([FromBody] string username, [FromBody] string password)
-        //{
+        [HttpPost]
+        [Route("Login")]
+        public async Task<ActionResult> Login([FromBody] LoginRequest request)
+        {
 
-        //    //response: token
-        //    return Ok(new string[] { "value1", "value2" });
-        //}
+            //response: token
+            return Ok(new string[] { "value1", "value2" });
+        }
 
 
         //[HttpPost]
