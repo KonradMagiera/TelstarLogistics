@@ -27,14 +27,29 @@ namespace TelstarLogistics.Controllers.Api
         [Route("GetRoutes")]
         public async Task<ActionResult> GetRoutes([FromBody] GetRoutesRequest request)
         {
+            double priceMultiplier = 1.00;
+            double recommendPriceAddition = 0;
+            if (request.recommended == true) {
+                recommendPriceAddition = 10;
+            } else if (request.type == "liveAnimals")
+            {
+                priceMultiplier = 1.50;
+            } else if (request.type == "cautionsParcels")
+            {
+                priceMultiplier = 1.75;
+            } else if (request.type == "refrigertedGoods")
+            {
+                priceMultiplier = 1.10;
+            }
+
             // processRoutes(from, to)
             // for each route list calculate
-                // fetch time and price from competitors based on route id
-                // telstarPrice, oceanicPrice, indiaPrice
-                // telstarDuration, oceanicDuration, indiaPrice
+            // fetch time and price from competitors based on route id
+            // telstarPrice, oceanicPrice, indiaPrice
+            // telstarDuration, oceanicDuration, indiaPrice
             // filter best, fastest and cheapest routes
-                // check if request has recommended = true and if one of the route lists is only composed of car routes
-                
+            // check if request has recommended = true and if one of the route lists is only composed of car routes
+
 
             // response: Provides list of routes, one for each of types (best, Cheapest, Shortest) 
             return Ok(new string[] { "value1", "value2" });
