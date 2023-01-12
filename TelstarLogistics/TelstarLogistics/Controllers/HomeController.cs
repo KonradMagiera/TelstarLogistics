@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using TelstarLogistics.Data;
 using TelstarLogistics.Models;
 
 namespace TelstarLogistics.Controllers
