@@ -73,7 +73,6 @@ namespace TelstarLogistics.Data
 
                 entity.Property(e => e.RouteId).ValueGeneratedNever();
 
-                entity.Property(e => e.Cost).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.TransportType).HasColumnType("text");
 
