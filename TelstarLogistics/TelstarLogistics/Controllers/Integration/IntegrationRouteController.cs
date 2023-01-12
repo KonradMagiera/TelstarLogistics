@@ -16,17 +16,15 @@ namespace TelstarLogistics.Controllers.Integration
 {
     [Route("api")]
     [ApiController]
-    public class RouteController : ControllerBase
+    public class IntegrationRouteController : ControllerBase
     {
-        [HttpGet]
+        [HttpPost]
         [Route("GetRoute")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Produces(MediaTypeNames.Application.Json)]
-        public async Task<ActionResult> Get([FromHeader] string correlationID, [FromHeader] string collaborationID,
-        [FromQuery] string from, [FromQuery] string to, [FromQuery] string type, [FromQuery] DateTime arrivalTime, 
-        [FromQuery] string currency, [FromQuery] float weight, [FromQuery] float height, [FromQuery] float width, 
-        [FromQuery] float depth, [FromQuery] bool recommended)
+        public async Task<ActionResult> GetRoute([FromHeader] string correlationID, [FromHeader] string collaborationID,
+            [FromBody] GetRouteIntegrationRequest request)
         {
             if (collaborationID != "todo-env")
             {
@@ -42,8 +40,5 @@ namespace TelstarLogistics.Controllers.Integration
 
             return Ok(new IntegrationResponse(0.00, 01, correlationID));
         }
- 
-
-
     }
 }
