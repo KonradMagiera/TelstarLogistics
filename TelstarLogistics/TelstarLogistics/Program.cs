@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TelstarLogistics.Data;
+using TelstarLogistics.Models.ApiModel;
+using TelstarLogistics.Controllers.Integration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,10 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<MyDbContext>(
+    opt => opt.UseInMemoryDatabase("TelstarDb")
+    );
 
 var app = builder.Build();
 

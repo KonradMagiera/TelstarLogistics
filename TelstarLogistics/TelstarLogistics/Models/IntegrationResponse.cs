@@ -2,10 +2,11 @@
 {
     public class IntegrationResponse
     {
-        public IntegrationResponse(double cost, float duration, string correlationID) {
-            this.Cost = cost;
-            this.Duration = duration;
-            this.CorrelationID= correlationID;
+        public IntegrationResponse(double cost, float duration, string correlationID)
+        {
+            Cost = cost;
+            Duration = duration;
+            CorrelationID = correlationID;
         }
 
         public double Cost { get; set; }
