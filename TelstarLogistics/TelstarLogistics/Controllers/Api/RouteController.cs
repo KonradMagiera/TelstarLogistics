@@ -47,13 +47,17 @@ namespace TelstarLogistics.Controllers.Api
             List<GetRoutesResponse> routes = new List<GetRoutesResponse>();
             
             routes.Add(new GetRoutesResponse { RouteType = "fastest", DeliveryTime = new DateTime().AddHours(travelDistance * 4),
-                TelstarPrice = (travelDistance * 3 * priceMultiplier) + recommendPriceAddition, Path = path });
+                TelstarPrice = (travelDistance * 3 * priceMultiplier) + recommendPriceAddition, Path = path,
+                TotalPrice = (travelDistance * 3 * priceMultiplier)
+            });
 
 
             var travelDistance2 = dijkstra.GetRoute(request.from, request.to, true, false, out var path2);
 
             routes.Add(new GetRoutesResponse { RouteType = "best", DeliveryTime = new DateTime().AddHours(travelDistance2 * 4), 
-                TelstarPrice = (travelDistance * 3 * priceMultiplier) + recommendPriceAddition, Path = path2 });
+                TelstarPrice = (travelDistance * 3 * priceMultiplier) + recommendPriceAddition, Path = path2,
+            TotalPrice = (travelDistance * 3 * priceMultiplier)
+            });
 
             // telstarPrice, overall price
             // overallDuration
