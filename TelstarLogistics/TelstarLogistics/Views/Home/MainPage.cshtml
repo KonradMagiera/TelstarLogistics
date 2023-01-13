@@ -1,4 +1,5 @@
-﻿@{
+﻿@model TelstarLogistics.Models.City
+@{
     ViewData["Title"] = "MainPage";
     var user = ViewBag.User;
 }
@@ -14,14 +15,16 @@
                     <div class="form-content">
                         <div class="form-items">
                             <!--Source destination-->
-                            <form class="requires-validation" validate>
+                            <form class="requires-validation" name="form" validate>
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <label>From:</label>
                                         <select class="form-control form-control-lg" name="source" required>
                                             <option></option>
-                                            <option value="A">Congo</option>
-                                            <option value="B">Congo B</option>
+                                            @foreach (City city  in ViewBag?.Cities)
+                                            {
+                                                <option value="city.id">@city.Name</option>
+                                            }
                                         </select>
                                         <div class="invalid-feedback">Source destination field cannot be blank!</div>
                                     </div>
@@ -32,8 +35,10 @@
                                         <label>To:</label>
                                         <select class="form-control form-control-lg" name="destination" required>
                                             <option></option>
-                                            <option value="A">Congo</option>
-                                            <option value="B">Congo B</option>
+                                            @foreach (City city in ViewBag?.Cities)
+                                            {
+                                                <option value="city.id">@city.Name</option>
+                                            }
                                         </select>
                                         <div class="invalid-feedback">Final destination field cannot be blank!</div>
                                     </div>
@@ -46,8 +51,9 @@
                                     <div class="col-8">
                                         <select class="form-control" name="parcelType" required>
                                             <option></option>
-                                            <option value="A">Congo</option>
-                                            <option value="B">Congo B</option>
+                                            <option value="liveAnimals">Live animals</option>
+                                            <option value="cautionsParcels">Cautious parcels</option>
+                                            <option value="refrigeratedGoods">Refrigerated goods</option>
                                         </select>
                                         <div class="invalid-feedback">Parcel type field cannot be blank!</div>
                                     </div>
@@ -237,7 +243,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <h4>Jan Kowalski</h4>
+                        <h4>@ViewBag?.EOTM</h4>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

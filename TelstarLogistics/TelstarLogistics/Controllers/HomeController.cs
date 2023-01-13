@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Data.Entity;
 using System.Diagnostics;
+using TelstarLogistics.Controllers.Api;
 using TelstarLogistics.Data;
 using TelstarLogistics.Models;
 
@@ -10,6 +12,9 @@ namespace TelstarLogistics.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+
+        TelstarLogisticsContext dbContext = new TelstarLogisticsContext();
+
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -26,10 +31,9 @@ namespace TelstarLogistics.Controllers
         [HttpPost]
         public IActionResult Index(User _user)
         {
-            TelstarLogisticsContext _telstarLogistics = new TelstarLogisticsContext();
             var test = _user;
             var muser = _user.UserName;
-            var searchedUser = _telstarLogistics.Users.FirstOrDefault(m =>
+            var searchedUser = dbContext.Users.FirstOrDefault(m =>
               EF.Functions.Like(m.UserName, _user.UserName) && EF.Functions.Like(m.Password, _user.Password));
             if(searchedUser == null)
             {
@@ -49,9 +53,12 @@ namespace TelstarLogistics.Controllers
 
         public IActionResult MainPage()
         {
+            BookingController bookingController = new BookingController();
+            List<City> cityList = dbContext.Cities.ToList();
             ViewBag.UserRole = TempData["UserRole"].ToString();
             ViewBag.UserName = TempData["UserName"].ToString();
-           
+            ViewBag.Cities = cityList;
+            ViewBag.EOTM = bookingController.GetEmployeeOfMonth().GetAwaiter().GetResult().ToString();
             return View();
         }
 
@@ -59,6 +66,9 @@ namespace TelstarLogistics.Controllers
         {
             return View();
         }
+
+
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

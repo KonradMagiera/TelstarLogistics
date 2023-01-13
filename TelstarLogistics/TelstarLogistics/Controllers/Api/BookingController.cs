@@ -21,6 +21,10 @@ namespace TelstarLogistics.Controllers.Api
 
             var Bookings = dbContext.Bookings
                 .Where(x => x.Handover >= firstDayOfMonth);
+            if(Bookings == null || Bookings.Count() == 0)
+            {
+                return Ok("No one");
+            }
             IDictionary<int, decimal> userBookingRevenues = new Dictionary<int, decimal>();
 
             foreach (var booking in Bookings)
