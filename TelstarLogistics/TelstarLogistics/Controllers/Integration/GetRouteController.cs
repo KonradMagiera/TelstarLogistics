@@ -37,6 +37,7 @@ namespace TelstarLogistics.Controllers.Integration
             {
                 return BadRequest("Weight cannot be null, 0 or over 40 kg");
             }
+
             float priceMultiplier = 1.00f;
             if (request.Type == "liveAnimals")
             {
