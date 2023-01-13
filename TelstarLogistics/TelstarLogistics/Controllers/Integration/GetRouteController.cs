@@ -53,7 +53,7 @@ namespace TelstarLogistics.Controllers.Integration
 
             Dijkstra dijkstra = new Dijkstra();
 
-            var travelDistance = dijkstra.GetRoute(request.From, request.To, true, false, out var path)
+            var travelDistance = dijkstra.GetRoute(request.From, request.To, true, false, out var path);
 
             return Ok(new IntegrationResponse(travelDistance * 3, travelDistance * 4, correlationID));
         }
