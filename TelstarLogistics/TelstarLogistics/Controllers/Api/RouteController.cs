@@ -45,22 +45,21 @@ namespace TelstarLogistics.Controllers.Api
 
             var fastestRoute = dijkstra.GetShortestRoute(request.from, request.to, out var path);
             List<GetRoutesResponse> routes = new List<GetRoutesResponse>();
-
-            var now = DateTime.Now;
-            
+  
+            var now = request.handover;
             routes.Add(new GetRoutesResponse { RouteType = "fastest", DeliveryTime = now.AddHours(fastestRoute * 4),
                 TelstarPrice = (fastestRoute * 3 * priceMultiplier) + recommendPriceAddition, Path = path,
                 TotalPrice = (fastestRoute * 3 * priceMultiplier)
             });
 
-            var now2 = DateTime.Now;
+            var now2 = request.handover;
             var bestRoute = dijkstra.GetBestRoute(request.from, request.to, out var path2);
 
             routes.Add(new GetRoutesResponse { RouteType = "best", DeliveryTime = now2.AddHours(bestRoute * 4), 
                 TelstarPrice = (bestRoute * 3 * priceMultiplier) + recommendPriceAddition, Path = path2,
             TotalPrice = (bestRoute * 3 * priceMultiplier)
             });
-            var now3 = DateTime.Now;
+            var now3 = request.handover;
             var cheapestRoute = dijkstra.GetNoPlaneRoute(request.from, request.to, out var path3);
 
             routes.Add(new GetRoutesResponse
@@ -68,6 +67,13 @@ namespace TelstarLogistics.Controllers.Api
                 TelstarPrice = (cheapestRoute * 3 * priceMultiplier) + recommendPriceAddition,  Path = path3,
                 TotalPrice = (cheapestRoute * 3 * priceMultiplier)
             });
+
+
+            //HttpClient client = new HttpClient();
+            //IntegrationRequest integrationReq = new IntegrationRequest { From = request.from, To = request.to, Type = "Live Animals", ArrivalTime = request.handover, 
+            //    Currency = "usd", Weight = request.weight, Height = request.height, Width = request.width, Depth = request.depth, Recommended = request.recommended };
+            //HttpResponseMessage response = await client.PostAsJsonAsync(
+            //   "https://wa-eit-dk1.azurewebsites.net/GetRoute", integrationReq);
 
 
             return Ok(routes);

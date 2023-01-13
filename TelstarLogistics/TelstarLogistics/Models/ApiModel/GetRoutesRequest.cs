@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿    using Microsoft.AspNetCore.Mvc;
 
 namespace TelstarLogistics.Models.ApiModel
 {
@@ -7,6 +7,7 @@ namespace TelstarLogistics.Models.ApiModel
         public string from { get; set; }
         public string to { get; set; }
         public string type { get; set; }
+        public DateTime handover { get; set; }
         public float weight { get; set; }
         public float height { get; set; }
         public float width { get; set; }
