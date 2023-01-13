@@ -48,7 +48,8 @@ public class Dijkstra
         if (cityIdToGraphIdx.TryGetValue(fromCity.CityId,out int fromIdx) && cityIdToGraphIdx.TryGetValue(toCity.CityId, out int toIdx))
         {
             var distances = ComputePaths(graph, fromIdx, out var parents, out var transportTypes, out int[] carDistance);
-            path = GetPath(toIdx, parents, transportTypes).Select(pathnode => $"{pathnode.Item2},{cities[pathnode.Item1].Name}").ToList();
+            path = GetPath(toIdx, parents, transportTypes).Select(pathnode => $"{pathnode.Item2} => {cities[pathnode.Item1].Name}").ToList();
+            path[0] = path[0].Replace("=>", "");
             return carDistance[toIdx];
         }
 

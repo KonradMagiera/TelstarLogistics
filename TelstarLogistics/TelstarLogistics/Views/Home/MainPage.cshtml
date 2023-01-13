@@ -147,7 +147,7 @@
                     <h1>Results</h1>
                 </div>
                 <hr class="my-3"/>
-                <table class="table">
+                <table class="table" width="95%">
                     <thead>
                         <tr>
                             <th scope="col">Offer</th>
@@ -155,7 +155,7 @@
                             <th scope="col">Distanse</th>
                             <th scope="col">Time of arival</th>
                             <th scope="col">Route</th>
-                            <th scope="col"></th>
+                            <th scope="col" width="100px"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -169,7 +169,7 @@
                                 <th scope="col">
                                     @foreach (string path in route.Path)
                                     {
-                                        @path
+                                        <div>@path</div>
                                     }
 
                                 </th>
