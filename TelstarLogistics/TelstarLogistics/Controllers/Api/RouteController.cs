@@ -43,25 +43,32 @@ namespace TelstarLogistics.Controllers.Api
             }
             Dijkstra dijkstra = new Dijkstra();
 
-            var travelDistance = dijkstra.GetRoute(request.from, request.to, false, true, out var path);
+            var fastestRoute = dijkstra.GetShortestRoute(request.from, request.to, out var path);
             List<GetRoutesResponse> routes = new List<GetRoutesResponse>();
+
+            var now = DateTime.Now;
             
-            routes.Add(new GetRoutesResponse { RouteType = "fastest", DeliveryTime = new DateTime().AddHours(travelDistance * 4),
-                TelstarPrice = (travelDistance * 3 * priceMultiplier) + recommendPriceAddition, Path = path,
-                TotalPrice = (travelDistance * 3 * priceMultiplier)
+            routes.Add(new GetRoutesResponse { RouteType = "fastest", DeliveryTime = now.AddHours(fastestRoute * 4),
+                TelstarPrice = (fastestRoute * 3 * priceMultiplier) + recommendPriceAddition, Path = path,
+                TotalPrice = (fastestRoute * 3 * priceMultiplier)
             });
 
+            var now2 = DateTime.Now;
+            var bestRoute = dijkstra.GetBestRoute(request.from, request.to, out var path2);
 
-            var travelDistance2 = dijkstra.GetRoute(request.from, request.to, true, false, out var path2);
+            routes.Add(new GetRoutesResponse { RouteType = "best", DeliveryTime = now2.AddHours(bestRoute * 4), 
+                TelstarPrice = (bestRoute * 3 * priceMultiplier) + recommendPriceAddition, Path = path2,
+            TotalPrice = (bestRoute * 3 * priceMultiplier)
+            });
+            var now3 = DateTime.Now;
+            var cheapestRoute = dijkstra.GetNoPlaneRoute(request.from, request.to, out var path3);
 
-            routes.Add(new GetRoutesResponse { RouteType = "best", DeliveryTime = new DateTime().AddHours(travelDistance2 * 4), 
-                TelstarPrice = (travelDistance * 3 * priceMultiplier) + recommendPriceAddition, Path = path2,
-            TotalPrice = (travelDistance * 3 * priceMultiplier)
+            routes.Add(new GetRoutesResponse
+            { RouteType = "cheapest",DeliveryTime = now3.AddHours(bestRoute * 4),
+                TelstarPrice = (cheapestRoute * 3 * priceMultiplier) + recommendPriceAddition,  Path = path3,
+                TotalPrice = (cheapestRoute * 3 * priceMultiplier)
             });
 
-            // telstarPrice, overall price
-            // overallDuration
-           
 
             return Ok(routes);
         }
