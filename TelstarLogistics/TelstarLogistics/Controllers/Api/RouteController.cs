@@ -83,9 +83,19 @@ namespace TelstarLogistics.Controllers.Api
         [Route("Login")]
         public async Task<ActionResult> Login([FromBody] LoginRequest request)
         {
+          //          public int UserId { get; set; }
+        //public string FirstName { get; set; } = null!;
+        //public string LastName { get; set; } = null!;
+        //public string UserName { get; set; } = null!;
+        //public string Password { get; set; } = null!;
+       // public string Role { get; set; } = null!;
 
+        User user2 = new User();
+
+            user2.UserName = "guzix";
+            user2.Role = "admin";
             //response: token
-            return Ok(new string[] { "value1", "value2" });
+            return Ok(user2);
         }
 
 
