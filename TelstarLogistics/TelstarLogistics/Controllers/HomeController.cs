@@ -104,13 +104,13 @@ namespace TelstarLogistics.Controllers
             }
             Dijkstra dijkstra = new Dijkstra();
 
-            var travelDistance = dijkstra.GetRoute(source, destination, false, true, out var path);
+            var travelDistance = dijkstra.GetShortestRoute(source, destination, out var path);
             List<GetRoutesResponse> routes = new List<GetRoutesResponse>();
 
             routes.Add(new GetRoutesResponse { RouteType = "fastest", DeliveryTime = new DateTime().AddHours(travelDistance * 4), TotalPrice = travelDistance * 3, Path = path });
 
 
-            var travelDistance2 = dijkstra.GetRoute(source, destination, true, false, out var path2);
+            var travelDistance2 = dijkstra.GetBestRoute(source, destination, out var path2);
 
             routes.Add(new GetRoutesResponse { RouteType = "best", DeliveryTime = new DateTime().AddHours(travelDistance2 * 4), TotalPrice = travelDistance2 * 3, Path = path2 });
 
