@@ -55,8 +55,14 @@ namespace TelstarLogistics.Controllers
         {
             BookingController bookingController = new BookingController();
             List<City> cityList = dbContext.Cities.ToList();
-            ViewBag.UserRole = TempData["UserRole"].ToString();
-            ViewBag.UserName = TempData["UserName"].ToString();
+            if (TempData["UserRole"] != null)
+            {
+                ViewBag.UserName = TempData["UserName"].ToString();
+            }
+            if (TempData["UserName"] != null)
+            {
+                ViewBag.UserName = TempData["UserName"].ToString();
+            }
             ViewBag.Cities = cityList;
             ViewBag.EOTM = bookingController.GetEmployeeOfMonth().GetAwaiter().GetResult().ToString();
             return View();

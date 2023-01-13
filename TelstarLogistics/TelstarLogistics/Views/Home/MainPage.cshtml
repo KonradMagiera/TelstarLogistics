@@ -14,12 +14,14 @@
                 <div class="form-holder">
                     <div class="form-content">
                         <div class="form-items">
+                         
+                            
                             <!--Source destination-->
-                            <form class="requires-validation" name="form" validate>
+                            <form class="requires-validation" name="form" validate onsubmit="getData(form)">
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <label>From:</label>
-                                        <select class="form-control form-control-lg" name="source" required>
+                                        <select class="form-control form-control-lg" name="source" required >
                                             <option></option>
                                             @foreach (City city  in ViewBag?.Cities)
                                             {
@@ -122,14 +124,34 @@
                                 </div>
                                 <!--Submit button-->
                                 <div class="form-button col-md-12 mt-3">
-                                    <input id="submit" type="submit"  class="btn btn-primary w-100" value="Search">
+                                    <input  type="submit"   class="btn btn-primary w-100" value="Search" >
                                 </div>
                             </form>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <script>
+                function getData(form) {
+                  var formData = new FormData(form);
+
+                  console.log(formData)
+                  // iterate through entries...
+                  for (var pair of formData.entries()) {
+                    console.log(pair[0] + ": " + pair[1]);
+                  }
+
+                  // ...or output as an object
+                  console.log(Object.fromEntries(formData));
+                }
+
+               
+               
+
+        </script>
         <!--Results-->
         <div class="row">
             <div class="col mt-5" style="text-align:center; ">
