@@ -1,4 +1,5 @@
-﻿using TelstarLogistics.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using TelstarLogistics.Data;
 using TelstarLogistics.Models;
 using Route = TelstarLogistics.Models.Route;
 
@@ -14,7 +15,7 @@ public class Dijkstra
     public string TEST(string from, string to)
     {
         var search = new Dijkstra();
-        var distance = search.GetRoute(from.ToLower(), to.ToLower(),false, out var path);
+        var distance = search.GetRoute(from, to,false,true, out var path);
 
         string output = ($"distance:{distance} \n");
         foreach (var city in path)
@@ -25,10 +26,23 @@ public class Dijkstra
         return output;
     }
 
-
-    public int GetRoute(string? from, string? to, bool reccommended, out List<string> path)
+    public string TEST2(string from, string to)
     {
-        graph = CreateGraph(reccommended);
+        var search = new Dijkstra();
+        var distance = search.GetRoute(from, to,false,false, out var path);
+
+        string output = ($"distance:{distance} \n");
+        foreach (var city in path)
+        {
+            output += ($"{city} -> ");
+        }
+
+        return output;
+    }
+
+    public int GetRoute(string? from, string? to, bool reccommended, bool planesEnabled, out List<string> path)
+    {
+        graph = CreateGraph(reccommended, planesEnabled);
         var fromCity = cities.FirstOrDefault(city => city.Name == from);
         var toCity = cities.FirstOrDefault(city => city.Name == to);
         if (cityIdToGraphIdx.TryGetValue(fromCity.CityId,out int fromIdx) && cityIdToGraphIdx.TryGetValue(toCity.CityId, out int toIdx))
@@ -42,110 +56,24 @@ public class Dijkstra
         return -1;
     }
 
-    private (int, string)[,] CreateGraph(bool recommended)
+    private (int, string)[,] CreateGraph(bool recommended, bool planes)
     {
         var context = new TelstarLogisticsContext();
 
         cities = context.Cities.ToList();
-        //cities = new List<City>
-        //{
-        //    new City
-        //    {
-        //        Name = "c1",
-        //        CityId = 1
-        //    },
-        //    new City
-        //    {
-        //        Name = "c2",
-        //        CityId = 2
-        //    },
-        //    new City
-        //    {
-        //        Name = "c3",
-        //        CityId = 3
-        //    },
-        //    new City
-        //    {
-        //        Name = "c4",
-        //        CityId = 4
-        //    },
-        //    new City
-        //    {
-        //        Name = "c0",
-        //        CityId = 0
-        //    },
-        //    new City
-        //    {
-        //        Name = "c5",
-        //        CityId = 5
-        //    },
-        //};
+
         cityIdToGraphIdx = cities.ToDictionary(city => city.CityId, city => cities.IndexOf(city));
 
         var graph = new (int, string)[cities.Count, cities.Count];
 
-        var routes = recommended ? context.Routes.Where(route => route.TransportType == "car").ToList() : context.Routes.ToList();
-        //var routes = new List<Route>
-        //{
-        //    new Route
-        //    {
-        //        City1Id = 1,
-        //        City2Id = 2,
-        //        Distance = 10,
-        //        TransportType = "car"
-        //    },
-        //    new Route
-        //    {
-        //        City1Id = 2,
-        //        City2Id = 3,
-        //        Distance = 10,
-        //        TransportType = "car"
-        //    },
-        //    new Route
-        //    {
-        //        City1Id = 3,
-        //        City2Id = 4,
-        //        Distance = 10,
-        //        TransportType = "car"
-        //    },
-        //    new Route
-        //    {
-        //        City1Id = 4,
-        //        City2Id = 1,
-        //        Distance = 10,
-        //        TransportType = "car"
-        //    },
-        //    new Route
-        //    {
-        //        City1Id = 1,
-        //        City2Id = 3,
-        //        Distance = 1,
-        //        TransportType = "plane"
-        //    },
-        //    new Route
-        //    {
-        //        City1Id = 0,
-        //        City2Id = 1,
-        //        Distance = 5,
-        //        TransportType = "car"
-        //    },
-        //    new Route
-        //    {
-        //        City1Id = 3,
-        //        City2Id = 5,
-        //        Distance = 5,
-        //        TransportType = "car"
-        //    },
-        //    new Route
-        //    {
-        //        City1Id = 0,
-        //        City2Id = 5,
-        //        Distance = 20,
-        //        TransportType = "boat"
-        //    },
+        var routes = recommended ? context.Routes.Where(route => EF.Functions.Like(route.TransportType, "car")).ToList() : context.Routes.ToList();
 
-        //};
 
+        if (!planes)
+        {
+            routes.RemoveAll(route => route.TransportType == "plane");
+        }
+    
         for (int i = 0; i < routes.Count; i++)
         {
             var route = routes[i];
