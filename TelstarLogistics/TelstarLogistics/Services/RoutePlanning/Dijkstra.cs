@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TelstarLogistics.Data;
 using TelstarLogistics.Models;
+using static Humanizer.On;
 using Route = TelstarLogistics.Models.Route;
 
 namespace TelstarLogistics.Services.RoutePlanning;
@@ -15,7 +16,7 @@ public class Dijkstra
     public string TEST(string from, string to)
     {
         var search = new Dijkstra();
-        var distance = search.GetRoute(from, to,false,true, out var path);
+        var distance = search.GetRoute(from, to,false,true, false, out var path);
 
         string output = ($"distance:{distance} \n");
         foreach (var city in path)
@@ -29,7 +30,7 @@ public class Dijkstra
     public string TEST2(string from, string to)
     {
         var search = new Dijkstra();
-        var distance = search.GetRoute(from, to,false,false, out var path);
+        var distance = search.GetRoute(from, to,false,false, true, out var path);
 
         string output = ($"distance:{distance} \n");
         foreach (var city in path)
@@ -40,12 +41,58 @@ public class Dijkstra
         return output;
     }
 
-    public int GetRoute(string? from, string? to, bool reccommended, bool planesEnabled, out List<string> path)
+    public string TEST3(string from, string to)
     {
-        graph = CreateGraph(reccommended, planesEnabled);
+        var search = new Dijkstra();
+        var distance = search.GetRoute(from, to, false, false, false, out var path);
+
+        string output = ($"distance:{distance} \n");
+        foreach (var city in path)
+        {
+            output += ($"{city} -> ");
+        }
+
+        return output;
+    }
+
+    public int GetBestRoute(string? from, string? to ,out List<string> path)
+    {
+        var search = new Dijkstra();
+        var distance = search.GetRoute(from, to, false, false, true, out path);
+
+        return distance;
+    }
+
+    public int GetShortestRoute(string? from, string? to, out List<string> path)
+    {
+        var search = new Dijkstra();
+        var distance = search.GetRoute(from, to, false, true, false, out path);
+
+        return distance;
+    }
+    public int GetNoPlaneRoute(string? from, string? to, out List<string> path)
+    {
+        var search = new Dijkstra();
+        var distance = search.GetRoute(from, to, false, false, false, out path);
+
+        return distance;
+    }
+    public int GetReccomended(string? from, string? to, out List<string> path)
+    {
+        var search = new Dijkstra();
+        var distance = search.GetRoute(from, to, true, false, false, out path);
+
+        return distance;
+    }
+
+
+
+    public int GetRoute(string? from, string? to, bool reccommended, bool planesEnabled, bool best, out List<string> path)
+    {
+        graph = CreateGraph(reccommended, planesEnabled, best);
         var fromCity = cities.FirstOrDefault(city => city.Name == from);
         var toCity = cities.FirstOrDefault(city => city.Name == to);
-        if (cityIdToGraphIdx.TryGetValue(fromCity.CityId,out int fromIdx) && cityIdToGraphIdx.TryGetValue(toCity.CityId, out int toIdx))
+        if (toCity != null && fromCity != null && cityIdToGraphIdx.TryGetValue(fromCity.CityId,out int fromIdx) && cityIdToGraphIdx.TryGetValue(toCity.CityId, out int toIdx))
         {
             var distances = ComputePaths(graph, fromIdx, out var parents, out var transportTypes, out int[] carDistance);
             path = GetPath(toIdx, parents, transportTypes).Select(pathnode => $"{pathnode.Item2},{cities[pathnode.Item1].Name}").ToList();
@@ -56,7 +103,7 @@ public class Dijkstra
         return -1;
     }
 
-    private (int, string)[,] CreateGraph(bool recommended, bool planes)
+    private (int, string)[,] CreateGraph(bool recommended, bool planes, bool best)
     {
         var context = new TelstarLogisticsContext();
 
@@ -67,11 +114,22 @@ public class Dijkstra
         var graph = new (int, string)[cities.Count, cities.Count];
 
         var routes = recommended ? context.Routes.Where(route => EF.Functions.Like(route.TransportType, "car")).ToList() : context.Routes.ToList();
-
+        
 
         if (!planes)
         {
             routes.RemoveAll(route => route.TransportType == "plane");
+        }
+
+        if (best)
+        {
+            for (int i = 0; i < routes.Count; i++)
+            {
+                if (routes[i].TransportType != "car")
+                {
+                    routes[i].Weight = 100;
+                }
+            }
         }
     
         for (int i = 0; i < routes.Count; i++)
@@ -86,8 +144,8 @@ public class Dijkstra
                 continue;
             }
 
-            graph[city1, city2] = (route.Distance, route.TransportType);
-            graph[city2, city1] = (route.Distance, route.TransportType);
+            graph[city1, city2] = (route.Distance + (int)route.Weight, route.TransportType);
+            graph[city2, city1] = (route.Distance + (int)route.Weight, route.TransportType);
         }
 
         return graph;
