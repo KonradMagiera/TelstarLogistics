@@ -63,17 +63,31 @@ namespace TelstarLogistics.Controllers.Api
             var cheapestRoute = dijkstra.GetNoPlaneRoute(request.from, request.to, out var path3);
 
             routes.Add(new GetRoutesResponse
-            { RouteType = "cheapest",DeliveryTime = now3.AddHours(bestRoute * 4),
+            { RouteType = "cheapest",DeliveryTime = now3.AddHours(cheapestRoute * 4),
                 TelstarPrice = (cheapestRoute * 3 * priceMultiplier) + recommendPriceAddition,  Path = path3,
                 TotalPrice = (cheapestRoute * 3 * priceMultiplier)
             });
 
 
             //HttpClient client = new HttpClient();
-            //IntegrationRequest integrationReq = new IntegrationRequest { From = request.from, To = request.to, Type = "Live Animals", ArrivalTime = request.handover, 
-            //    Currency = "usd", Weight = request.weight, Height = request.height, Width = request.width, Depth = request.depth, Recommended = request.recommended };
+            //IntegrationRequest integrationReq = new IntegrationRequest
+            //{
+            //    From = request.from,
+            //    To = request.to,
+            //    Type = "Live Animals",
+            //    ArrivalTime = request.handover,
+            //    Currency = "usd",
+            //    Weight = request.weight,
+            //    Height = request.height,
+            //    Width = request.width,
+            //    Depth = request.depth,
+            //    Recommended = request.recommended
+            //};
+            //client.DefaultRequestHeaders.Add("collaborationID", "f87c9339-ff39-4225-be09-fca238a03ede");
+            //client.DefaultRequestHeaders.Add("correlationID", "f87c9339-ff39-4225-be09-fca238a03ede");
             //HttpResponseMessage response = await client.PostAsJsonAsync(
             //   "https://wa-eit-dk1.azurewebsites.net/GetRoute", integrationReq);
+   
 
 
             return Ok(routes);
