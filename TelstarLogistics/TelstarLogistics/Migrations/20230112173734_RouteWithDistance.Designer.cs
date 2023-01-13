@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TelstarLogistics.Data;
 
@@ -11,9 +12,10 @@ using TelstarLogistics.Data;
 namespace TelstarLogistics.Migrations
 {
     [DbContext(typeof(TelstarLogisticsContext))]
-    partial class TelstarLogisticsContextModelSnapshot : ModelSnapshot
+    [Migration("20230112173734_RouteWithDistance")]
+    partial class RouteWithDistance
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,9 +28,6 @@ namespace TelstarLogistics.Migrations
                 {
                     b.Property<int>("BookingId")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("BookingRevenue")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("CargoCenterLocations")
                         .IsRequired()
@@ -69,8 +68,6 @@ namespace TelstarLogistics.Migrations
                     b.Property<decimal>("Width")
                         .HasColumnType("decimal(18,0)");
 
-                    b.HasKey("BookingId");
-
                     b.ToTable("Booking", (string)null);
                 });
 
@@ -83,16 +80,11 @@ namespace TelstarLogistics.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("CityId");
-
                     b.ToTable("City", (string)null);
                 });
 
             modelBuilder.Entity("TelstarLogistics.Models.Route", b =>
                 {
-                    b.Property<int>("RouteId")
-                        .HasColumnType("int");
-
                     b.Property<int>("City1Id")
                         .HasColumnType("int");
 
@@ -102,6 +94,9 @@ namespace TelstarLogistics.Migrations
                     b.Property<int>("Distance")
                         .HasColumnType("int");
 
+                    b.Property<int>("RouteId")
+                        .HasColumnType("int");
+
                     b.Property<string>("TransportType")
                         .IsRequired()
                         .HasColumnType("text");
@@ -109,16 +104,11 @@ namespace TelstarLogistics.Migrations
                     b.Property<decimal>("Weight")
                         .HasColumnType("decimal(18,0)");
 
-                    b.HasKey("RouteId");
-
                     b.ToTable("Route", (string)null);
                 });
 
             modelBuilder.Entity("TelstarLogistics.Models.User", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("text");
@@ -135,11 +125,12 @@ namespace TelstarLogistics.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.HasKey("UserId");
 
                     b.ToTable("User", (string)null);
                 });
