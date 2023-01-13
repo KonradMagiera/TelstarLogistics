@@ -17,7 +17,7 @@
                          
                             
                             <!--Source destination-->
-                            <form class="requires-validation" name="form" validate onsubmit="getData(form)">
+                            <form class="requires-validation" name="form" validate >
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <label>From:</label>
@@ -138,14 +138,24 @@
                 function getData(form) {
                   var formData = new FormData(form);
 
-                  console.log(formData)
-                  // iterate through entries...
-                  for (var pair of formData.entries()) {
-                    console.log(pair[0] + ": " + pair[1]);
-                  }
-
-                  // ...or output as an object
-                  console.log(Object.fromEntries(formData));
+                  
+                  fetch( window.location.href + "/GetRoutes", {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        "from": "hh",
+                        "to": "hh",
+                        "type": "hh",
+                        "weight":12
+                        "height": 23
+                        "width": 43
+                        "depth": null;
+                        "recommended":
+                    })
+                })
                 }
 
                

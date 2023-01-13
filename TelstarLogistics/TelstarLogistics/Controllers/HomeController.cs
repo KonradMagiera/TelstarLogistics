@@ -6,6 +6,8 @@ using System.Diagnostics;
 using TelstarLogistics.Controllers.Api;
 using TelstarLogistics.Data;
 using TelstarLogistics.Models;
+using TelstarLogistics.Models.ApiModel;
+using TelstarLogistics.Services.RoutePlanning;
 
 namespace TelstarLogistics.Controllers
 {
@@ -73,8 +75,51 @@ namespace TelstarLogistics.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<ActionResult> submit([FromBody] GetRoutesRequest request)
+        {
+            double priceMultiplier = 1.00;
+            double recommendPriceAddition = 0;
+            if (request.recommended == true)
+            {
+                recommendPriceAddition = 10;
+            }
+            else if (request.type == "liveAnimals")
+            {
+                priceMultiplier = 1.50;
+            }
+            else if (request.type == "cautionsParcels")
+            {
+                priceMultiplier = 1.75;
+            }
+            else if (request.type == "refrigertedGoods")
+            {
+                priceMultiplier = 1.10;
+            }
+            Dijkstra dijkstra = new Dijkstra();
 
-        
+            var travelDistance = dijkstra.GetRoute(request.from, request.to, false, true, out var path);
+            List<GetRoutesResponse> routes = new List<GetRoutesResponse>();
+
+            routes.Add(new GetRoutesResponse { RouteType = "fastest", DeliveryTime = new DateTime().AddHours(travelDistance * 4), Price = travelDistance * 3, Path = path });
+
+
+            var travelDistance2 = dijkstra.GetRoute(request.from, request.to, true, false, out var path2);
+
+            routes.Add(new GetRoutesResponse { RouteType = "best", DeliveryTime = new DateTime().AddHours(travelDistance2 * 4), Price = travelDistance2 * 3, Path = path2 });
+
+            // for each route list calculate
+            // fetch time and price from competitors based on route id
+            // telstarPrice, oceanicPrice, indiaPrice
+            // telstarDuration, oceanicDuration, indiaPrice
+            // filter best, fastest and cheapest routes
+            // check if request has recommended = true and if one of the route lists is only composed of car routes
+
+
+            // response: Provides list of routes, one for each of types (best, Cheapest, Shortest) 
+
+            return Ok(routes);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
