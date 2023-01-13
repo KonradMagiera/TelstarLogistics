@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using TelstarLogistics.Data;
 using TelstarLogistics.Models;
 using TelstarLogistics.Models.ApiModel;
@@ -29,41 +27,37 @@ namespace TelstarLogistics.Controllers.Api
         [Route("GetRoutes")]
         public async Task<ActionResult> GetRoutes([FromBody] GetRoutesRequest request)
         {
-            double priceMultiplier = 1.00;
-            double recommendPriceAddition = 0;
+            float priceMultiplier = 1.00f;
+            float recommendPriceAddition = 0;
             if (request.recommended == true) {
-                recommendPriceAddition = 10;
+                recommendPriceAddition = 10f;
             } else if (request.type == "liveAnimals")
             {
-                priceMultiplier = 1.50;
+                priceMultiplier = 1.50f;
             } else if (request.type == "cautionsParcels")
             {
-                priceMultiplier = 1.75;
+                priceMultiplier = 1.75f;
             } else if (request.type == "refrigertedGoods")
             {
-                priceMultiplier = 1.10;
+                priceMultiplier = 1.10f;
             }
             Dijkstra dijkstra = new Dijkstra();
 
             var travelDistance = dijkstra.GetRoute(request.from, request.to, false, true, out var path);
             List<GetRoutesResponse> routes = new List<GetRoutesResponse>();
             
-            routes.Add(new GetRoutesResponse { RouteType = "fastest", DeliveryTime = new DateTime().AddHours(travelDistance * 4), Price = travelDistance * 3, Path = path });
+            routes.Add(new GetRoutesResponse { RouteType = "fastest", DeliveryTime = new DateTime().AddHours(travelDistance * 4),
+                TelstarPrice = (travelDistance * 3 * priceMultiplier) + recommendPriceAddition, Path = path });
 
 
             var travelDistance2 = dijkstra.GetRoute(request.from, request.to, true, false, out var path2);
 
-            routes.Add(new GetRoutesResponse { RouteType = "best", DeliveryTime = new DateTime().AddHours(travelDistance2 * 4), Price = travelDistance2 * 3, Path = path2 });
+            routes.Add(new GetRoutesResponse { RouteType = "best", DeliveryTime = new DateTime().AddHours(travelDistance2 * 4), 
+                TelstarPrice = (travelDistance * 3 * priceMultiplier) + recommendPriceAddition, Path = path2 });
 
-            // for each route list calculate
-            // fetch time and price from competitors based on route id
-            // telstarPrice, oceanicPrice, indiaPrice
-            // telstarDuration, oceanicDuration, indiaPrice
-            // filter best, fastest and cheapest routes
-            // check if request has recommended = true and if one of the route lists is only composed of car routes
-
-
-            // response: Provides list of routes, one for each of types (best, Cheapest, Shortest) 
+            // telstarPrice, overall price
+            // overallDuration
+           
 
             return Ok(routes);
         }

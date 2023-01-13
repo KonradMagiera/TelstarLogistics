@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Mime;
 using TelstarLogistics.Models;
 using TelstarLogistics.Models.ApiModel;
+using TelstarLogistics.Services.RoutePlanning;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,7 +27,7 @@ namespace TelstarLogistics.Controllers.Integration
         public async Task<ActionResult> GetRoute([FromHeader] string correlationID, [FromHeader] string collaborationID,
             [FromBody] GetRouteIntegrationRequest request)
         {
-            if (collaborationID != "todo-env")
+            if (collaborationID != "f87c9339-ff39-4225-be09-fca238a03ede")
             {
                 return Unauthorized();
             }
@@ -36,16 +37,25 @@ namespace TelstarLogistics.Controllers.Integration
             {
                 return BadRequest("Weight cannot be null, 0 or over 40 kg");
             }
-     
+            float priceMultiplier = 1.00f;
+            if (request.Type == "liveAnimals")
+            {
+                priceMultiplier = 1.50f;
+            }
+            else if (request.Type == "cautionsParcels")
+            {
+                priceMultiplier = 1.75f;
+            }
+            else if (request.Type == "refrigertedGoods")
+            {
+                priceMultiplier = 1.10f;
+            }
 
-            // fetch database info based on parameters
-            // process based on algo
-            // map into IntegrationResponse
+            Dijkstra dijkstra = new Dijkstra();
 
-            // calculateAndFetchRoutes(recommended = true)
-            // for each route calculate price and time it takes
+            var travelDistance = dijkstra.GetRoute(request.From, request.To, true, false, out var path)
 
-            return Ok(new IntegrationResponse(0.00, 01, correlationID));
+            return Ok(new IntegrationResponse(travelDistance * 3, travelDistance * 4, correlationID));
         }
     }
 }

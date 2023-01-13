@@ -107,12 +107,12 @@ namespace TelstarLogistics.Controllers
             var travelDistance = dijkstra.GetRoute(source, destination, false, true, out var path);
             List<GetRoutesResponse> routes = new List<GetRoutesResponse>();
 
-            routes.Add(new GetRoutesResponse { RouteType = "fastest", DeliveryTime = new DateTime().AddHours(travelDistance * 4), Price = travelDistance * 3, Path = path });
+            routes.Add(new GetRoutesResponse { RouteType = "fastest", DeliveryTime = new DateTime().AddHours(travelDistance * 4), TotalPrice = travelDistance * 3, Path = path });
 
 
             var travelDistance2 = dijkstra.GetRoute(source, destination, true, false, out var path2);
 
-            routes.Add(new GetRoutesResponse { RouteType = "best", DeliveryTime = new DateTime().AddHours(travelDistance2 * 4), Price = travelDistance2 * 3, Path = path2 });
+            routes.Add(new GetRoutesResponse { RouteType = "best", DeliveryTime = new DateTime().AddHours(travelDistance2 * 4), TotalPrice = travelDistance2 * 3, Path = path2 });
 
             // for each route list calculate
             // fetch time and price from competitors based on route id
