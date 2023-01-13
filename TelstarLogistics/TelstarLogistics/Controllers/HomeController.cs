@@ -18,6 +18,7 @@ namespace TelstarLogistics.Controllers
 
         TelstarLogisticsContext dbContext = new TelstarLogisticsContext();
 
+        User _loggedUser = new User();
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -50,6 +51,7 @@ namespace TelstarLogistics.Controllers
 
                 return RedirectToAction("MainPage");
             }
+            _loggedUser = searchedUser;
             return View(_user);
         }
 
@@ -61,14 +63,14 @@ namespace TelstarLogistics.Controllers
             List<City> cityList = dbContext.Cities.ToList();
             if (TempData["UserRole"] != null)
             {
-                ViewBag.UserName = TempData["UserName"].ToString();
+                ViewBag.UserRole = TempData["UserRole"].ToString();
             }
             if (TempData["UserName"] != null)
             {
                 ViewBag.UserName = TempData["UserName"].ToString();
             }
             ViewBag.Cities = cityList;
-            ViewBag.EOTM = bookingController.GetEmployeeOfMonth().GetAwaiter().GetResult().ToString();
+            ViewBag.EOTM = getEmpotm();
             return View();
         }
 
@@ -144,16 +146,11 @@ namespace TelstarLogistics.Controllers
 
             BookingController bookingController = new BookingController();
             List<City> cityList = dbContext.Cities.ToList();
-            if (TempData["UserRole"] != null)
-            {
-                ViewBag.UserName = TempData["UserName"].ToString();
-            }
-            if (TempData["UserName"] != null)
-            {
-                ViewBag.UserName = TempData["UserName"].ToString();
-            }
+          
+            ViewBag.UserName = "admin";
+            ViewBag.UserRole = "admin";
             ViewBag.Cities = cityList;
-            ViewBag.EOTM = bookingController.GetEmployeeOfMonth().GetAwaiter().GetResult().ToString();
+            ViewBag.EOTM = getEmpotm();
             ViewBag.Results = routes;
 
             return View();
@@ -163,6 +160,36 @@ namespace TelstarLogistics.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private String getEmpotm()
+        {
+            DateTime date = DateTime.Now;
+            DateTime firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
+
+            var Bookings = dbContext.Bookings
+                .Where(x => x.Handover >= firstDayOfMonth);
+            if (Bookings == null || Bookings.Count() == 0)
+            {
+                return "No one";
+            }
+            IDictionary<int, decimal> userBookingRevenues = new Dictionary<int, decimal>();
+
+            foreach (var booking in Bookings)
+            {
+                if (userBookingRevenues.ContainsKey(booking.UserId))
+                {
+                    userBookingRevenues[booking.UserId] += booking.BookingRevenue;
+                }
+                else
+                {
+                    userBookingRevenues.Add(booking.UserId, booking.BookingRevenue);
+                }
+            }
+
+            int keyOfMaxValue = userBookingRevenues.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
+            var topUser = dbContext.Users.Find(keyOfMaxValue);
+            return $"{topUser.FirstName} {topUser.LastName}";
         }
     }
 }
