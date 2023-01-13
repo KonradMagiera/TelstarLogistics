@@ -14,6 +14,30 @@ public class DbInitializer
 
         ClearDb(context);
 
+        if (!context.Bookings.Any())
+        {
+            context.Bookings.AddRange(new List<Booking>
+            {
+                new()
+                {
+                    BookingId = 1,
+                    BookingRevenue = 1,
+                    CargoCenterLocations = "Warsaw",
+                    CustEmail = "test@gmail.com",
+                    CustName = "a",
+                    CustPhone = 5125513,
+                    Handover = DateTime.Now,
+                    Height= 30,
+                    Length= 30,
+                    ParcelType = "Live animals",
+                    Recommended = false,
+                    UserId= 2,
+                    Weight = 30,
+                    Width = 32,
+                }
+            });
+        }
+
         if (!context.Cities.Any())
         {
             context.Cities.AddRange(new List<City>
