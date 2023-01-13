@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using TelstarLogistics.Data;
 using TelstarLogistics.Models;
 using TelstarLogistics.Models.ApiModel;
+using TelstarLogistics.Services.RoutePlanning;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -41,8 +43,18 @@ namespace TelstarLogistics.Controllers.Api
             {
                 priceMultiplier = 1.10;
             }
+            Dijkstra dijkstra = new Dijkstra();
 
-            // processRoutes(from, to)
+            var travelDistance = dijkstra.GetRoute(request.from, request.to, false, true, out var path);
+            List<GetRoutesResponse> routes = new List<GetRoutesResponse>();
+            
+            routes.Add(new GetRoutesResponse { RouteType = "fastest", DeliveryTime = new DateTime().AddHours(travelDistance * 4), Price = travelDistance * 3, Path = path });
+
+
+            var travelDistance2 = dijkstra.GetRoute(request.from, request.to, true, false, out var path2);
+
+            routes.Add(new GetRoutesResponse { RouteType = "best", DeliveryTime = new DateTime().AddHours(travelDistance2 * 4), Price = travelDistance2 * 3, Path = path2 });
+
             // for each route list calculate
             // fetch time and price from competitors based on route id
             // telstarPrice, oceanicPrice, indiaPrice
@@ -52,7 +64,8 @@ namespace TelstarLogistics.Controllers.Api
 
 
             // response: Provides list of routes, one for each of types (best, Cheapest, Shortest) 
-            return Ok(new string[] { "value1", "value2" });
+
+            return Ok(routes);
         }
 
         [HttpPost]
@@ -70,9 +83,19 @@ namespace TelstarLogistics.Controllers.Api
         [Route("Login")]
         public async Task<ActionResult> Login([FromBody] LoginRequest request)
         {
+          //          public int UserId { get; set; }
+        //public string FirstName { get; set; } = null!;
+        //public string LastName { get; set; } = null!;
+        //public string UserName { get; set; } = null!;
+        //public string Password { get; set; } = null!;
+       // public string Role { get; set; } = null!;
 
+        User user2 = new User();
+
+            user2.UserName = "guzix";
+            user2.Role = "admin";
             //response: token
-            return Ok(new string[] { "value1", "value2" });
+            return Ok(user2);
         }
 
 

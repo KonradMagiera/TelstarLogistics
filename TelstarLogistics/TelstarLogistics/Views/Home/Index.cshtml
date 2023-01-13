@@ -1,225 +1,49 @@
-﻿@{
+﻿@model TelstarLogistics.Models.User
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="d-flexjustify-content-center align-items-center">
-    <div class="form-body  p-4">
+<div class="d-flex justify-content-center align-items-center">
+
+    <div class="form-body p-4">
         <div class="row">
-            <div class="col-sm">
-                <img src="src/map.png" width="100%"/>
-            </div>
-            <div class="col-sm">
-                <div class="form-holder">
-                    <div class="form-content">
-                        <div class="form-items">
-                            <!--Source destination-->
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                        {
+                            if (ViewBag.LoginStatus != null)
+                            {
+                                if (ViewBag.LoginStatus == 0)
+                                {
+                                    <div class="alert alert-danger"> Invalid login detail</div>
+                                }
+                            }
+
                             <form class="requires-validation" novalidate>
-                                <div class="row mt-3">
-                                    <div class="col-md-12">
-                                        <label>From:</label>
-                                        <select class="form-control form-control-lg" name="source">
-                                            <option value="A">Congo</option>
-                                            <option value="B">Congo B</option>
-                                        </select>
-                                        <div class="invalid-feedback">Source destination field cannot be blank!</div>
-                                    </div>
+                                <div class="col-md-12 mt-3">
+
+                                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Username"})
+
+                                    <div class="invalid-feedback">Username field cannot be blank!</div>
                                 </div>
-                                <!--Final destination-->
-                                <div class="row mt-3">
-                                    <div class="col-md-12">
-                                        <label>To:</label>
-                                        <select class="form-control form-control-lg" name="destination">
-                                            <option value="A">Congo</option>
-                                            <option value="B">Congo B</option>
-                                        </select>
-                                        <div class="invalid-feedback">Final destination field cannot be blank!</div>
-                                    </div>
+                                <div class="col-md-12 mt-3">
+                                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @type = "password"})
+
+                                    <div class="invalid-feedback">Password field cannot be blank!</div>
                                 </div>
-                                <!--Parcel type-->
-                                <div class="row mt-3">
-                                    <div class="col">
-                                        <label>Parcel type:</label>
-                                    </div>
-                                    <div class="col-8">
-                                        <select class="form-control" name="parcelType">
-                                            <option value="A">Congo</option>
-                                            <option value="B">Congo B</option>
-                                        </select>
-                                        <div class="invalid-feedback">Parcel type field cannot be blank!</div>
-                                    </div>
-                                </div>
-                                <!--Weight-->
-                                <div class="row mt-3" >
-                                   <div class="col">
-                                        <label>Weight:</label>
-                                   </div>
-                                    <div class="col-8">
-                                        <input class="form-control" type="number" name="weight" placeholder="kg" required>
-                                        <div class="invalid-feedback">Weight field cannot be blank!</div>
-                                    </div>
-                                </div>
-                                <!--Height-->
-                                <div class="row mt-3">
-                                    <div class="col">
-                                        <label>Height</label>
-                                    </div>
-                                    <div class="col-8">
-                                        <input class="form-control" type="number" name="height" placeholder="cm" required>
-                                        <div class="invalid-feedback">Height field cannot be blank!</div>
-                                    </div>
-                                </div>
-                                <!--Length-->
-                                <div class="row mt-3">
-                                    <div class="col">
-                                        <label>Length</label>
-                                    </div>
-                                    <div class="col-8">
-                                        <input class="form-control" type="number" name="length" placeholder="cm" required>
-                                        <div class="invalid-feedback">Length field cannot be blank!</div>
-                                    </div>
-                                </div>
-                                <!--Width-->
-                                <div class="row mt-3">
-                                    <div class="col">
-                                        <label>Width</label>
-                                    </div>
-                                    <div class="col-8">
-                                        <input class="form-control" type="number" name="width" placeholder="cm" required>
-                                        <div class="invalid-feedback">Width field cannot be blank!</div>
-                                    </div>
-                                </div>
-                                <!--DateTime of handover-->
-                                <div class="row mt-3">
-                                    <div class="col">
-                                        <label>Date/Time of handover</label>
-                                    </div>
-                                    <div class="col-8">
-                                        <input type="datetime-local" class="form-control" name="handover"/>
-                                        <div class="invalid-feedback">Time field cannot be blank!</div>
-                                    </div>
-                                </div>
-                                <!--Recommended-->
-                                <div class="row mt-3">
-                                    <div class="col">
-                                        <label>Reccomended</label>
-                                    </div>
-                                    <div class="col-8">
-                                        <div>
-                                            <input type="checkbox" class="form-check-input-lg" name="recommended"/>
-                                        </div>
-                                       
-                                    </div>
-                                </div>
-                                <!--Submit button-->
                                 <div class="form-button col-md-12 mt-3">
-                                    <button id="submit" type="submit"  class="btn btn-primary w-100">Sign in</button>
+                                    <button id="submit" type="submit" class="btn btn-primary w-100">Sign in</button>
                                 </div>
                             </form>
-                        </div>
+
+
+                        }
+
                     </div>
                 </div>
             </div>
         </div>
-        <!--Results-->
-        <div class="row">
-            <div class="col mt-5" style="text-align:center; ">
-                <h1>Results</h1>
-            </div>
-            <hr class="my-3"/>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Offer</th>
-                        <th scope="col">Prize</th>
-                        <th scope="col">Distanse</th>
-                        <th scope="col">Time of arival</th>
-                        <th scope="col">Route</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="col">Best</th>
-                        <th scope="col">200 USD</th>
-                        <th scope="col">1200 km</th>
-                        <th scope="col">06/10/1111 17:00</th>
-                        <th scope="col">trasa</th>
-                        <th scope="col"><button class="button btn-primary" data-toggle="modal" data-target="#routeModal">Select</button></th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
-
-
-    <!-- Route Modal  -->
-    <div class="modal fade bd-example-modal-lg" id="routeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form class="requires-validation" novalidate>
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">
-                            Are you sure you want to select Cheapest offer?
-                        </h5>
-                    </div>
-                
-                    <div class="modal-body">
-                        <div class="row mt-3">
-                            <div class="col">
-                                <label>Customer email:</label>
-                            </div>
-                            <div class="col-8">
-                                <input class="form-control" type="text" name="customerEmail" placeholder="" >
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col">
-                                <label>Customer name:</label>
-                            </div>
-                            <div class="col-8">
-                                <input class="form-control" type="text" name="customerName" placeholder="" required>
-                                <div class="invalid-feedback">Customer name field cannot be blank!</div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col">
-                                <label>Customer phone:</label>
-                            </div>
-                            <div class="col-8">
-                                <input class="form-control" type="text" name="customerPhone" placeholder="" >
-                            </div>
-                        </div>
-                    </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#confirmModal">Approve</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Confirm Modal -->
-    <div class="modal fade bd-example-modal-lg" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form class="requires-validation" novalidate>
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">
-                            Booking nr 123456
-                        </h5>
-                    </div>
-                
-                    <div class="modal-body">
-                        <h4>Created successfully!</h4>
-                    </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-  
-</div>    
+</div>
