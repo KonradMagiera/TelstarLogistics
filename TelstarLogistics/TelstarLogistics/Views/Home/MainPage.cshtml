@@ -1,4 +1,4 @@
-﻿@model TelstarLogistics.Models.City
+﻿@model TelstarLogistics.Models.City;
 @{
     ViewData["Title"] = "MainPage";
     var user = ViewBag.User;
@@ -17,7 +17,7 @@
                          
                             
                             <!--Source destination-->
-                            <form class="requires-validation" name="form" validate >
+                            <form class="requires-validation" name="form" validate method="post">
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <label>From:</label>
@@ -25,7 +25,7 @@
                                             <option></option>
                                             @foreach (City city  in ViewBag?.Cities)
                                             {
-                                                <option value="city.id">@city.Name</option>
+                                                <option value="@city.Name">@city.Name</option>
                                             }
                                         </select>
                                         <div class="invalid-feedback">Source destination field cannot be blank!</div>
@@ -39,7 +39,7 @@
                                             <option></option>
                                             @foreach (City city in ViewBag?.Cities)
                                             {
-                                                <option value="city.id">@city.Name</option>
+                                                <option value="@city.Name">@city.Name</option>
                                             }
                                         </select>
                                         <div class="invalid-feedback">Final destination field cannot be blank!</div>
@@ -117,7 +117,7 @@
                                     </div>
                                     <div class="col-8">
                                         <div>
-                                            <input type="checkbox" class="form-check-input-lg" name="recommended"/>
+                                            <input type="checkbox" class="form-check-input-lg" name="recommended" />
                                         </div>
                                        
                                     </div>
@@ -134,65 +134,53 @@
             </div>
         </div>
 
-        <script>
-                function getData(form) {
-                  var formData = new FormData(form);
+        
 
-                  
-                  fetch( window.location.href + "/GetRoutes", {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ 
-                        "from": "hh",
-                        "to": "hh",
-                        "type": "hh",
-                        "weight":12
-                        "height": 23
-                        "width": 43
-                        "depth": null;
-                        "recommended":
-                    })
-                })
-                }
 
-               
-               
-
-        </script>
         <!--Results-->
-        <div class="row">
-            <div class="col mt-5" style="text-align:center; ">
-                <h1>Results</h1>
-            </div>
-            <hr class="my-3"/>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Offer</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Distanse</th>
-                        <th scope="col">Time of arival</th>
-                        <th scope="col">Route</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="col">Best</th>
-                        <th scope="col">200 USD</th>
-                        <th scope="col">1200 km</th>
-                        <th scope="col">06/10/1111 17:00</th>
-                        <th scope="col">trasa</th>
-                        <th scope="col"><button class="button btn-primary w-75" data-toggle="modal" data-target="#routeModal">Select</button></th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+        @if (ViewBag.Results != null)
+        {
 
+
+            <div class="row">
+                <div class="col mt-5" style="text-align:center; ">
+                    <h1>Results</h1>
+                </div>
+                <hr class="my-3"/>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Offer</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Distanse</th>
+                            <th scope="col">Time of arival</th>
+                            <th scope="col">Route</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (TelstarLogistics.Models.ApiModel.GetRoutesResponse route in ViewBag.Results)
+                        {
+                            <tr>
+                                <th scope="col">@route.RouteType</th>
+                                <th scope="col">@route.Price USD</th>
+                                <th scope="col">@route.Path.Count</th>
+                                <th scope="col">@route.DeliveryTime</th>
+                                <th scope="col">
+                                    @foreach (string path in route.Path)
+                                    {
+                                        @path
+                                    }
+
+                                </th>
+                                <th scope="col"><button class="button btn-primary w-75" data-toggle="modal" data-target="#routeModal">Select</button></th>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        }
 
     <!-- Route Modal  -->
     <div class="modal fade bd-example-modal-lg" id="routeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
