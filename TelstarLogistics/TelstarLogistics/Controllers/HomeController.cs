@@ -82,47 +82,65 @@ namespace TelstarLogistics.Controllers
         {        
 
             Boolean recomend = recommended != null && recommended;
-           
 
-            double priceMultiplier = 1.00;
-            double recommendPriceAddition = 0;
+
+            float priceMultiplier = 1.00f;
+            float recommendPriceAddition = 0;
             if (recommended == true)
             {
-                recommendPriceAddition = 10;
+                recommendPriceAddition = 10f;
             }
             else if (parcelType == "liveAnimals")
             {
-                priceMultiplier = 1.50;
+                priceMultiplier = 1.50f;
             }
             else if (parcelType == "cautionsParcels")
             {
-                priceMultiplier = 1.75;
+                priceMultiplier = 1.75f;
             }
             else if (parcelType == "refrigertedGoods")
             {
-                priceMultiplier = 1.10;
+                priceMultiplier = 1.10f;
             }
             Dijkstra dijkstra = new Dijkstra();
 
-            var travelDistance = dijkstra.GetShortestRoute(source, destination, out var path);
+            var fastestRoute = dijkstra.GetShortestRoute(source, destination, out var path);
             List<GetRoutesResponse> routes = new List<GetRoutesResponse>();
 
-            routes.Add(new GetRoutesResponse { RouteType = "fastest", DeliveryTime = new DateTime().AddHours(travelDistance * 4), TotalPrice = travelDistance * 3, Path = path });
+            var now = DateTime.Now;
 
+            routes.Add(new GetRoutesResponse
+            {
+                RouteType = "fastest",
+                DeliveryTime = now.AddHours(fastestRoute * 4),
+                TelstarPrice = (fastestRoute * 3 * priceMultiplier) + recommendPriceAddition,
+                Path = path,
+                TotalPrice = (fastestRoute * 3 * priceMultiplier)
+            });
 
-            var travelDistance2 = dijkstra.GetBestRoute(source, destination, out var path2);
+            var now2 = DateTime.Now;
+            var bestRoute = dijkstra.GetBestRoute(source, destination, out var path2);
 
-            routes.Add(new GetRoutesResponse { RouteType = "best", DeliveryTime = new DateTime().AddHours(travelDistance2 * 4), TotalPrice = travelDistance2 * 3, Path = path2 });
+            routes.Add(new GetRoutesResponse
+            {
+                RouteType = "best",
+                DeliveryTime = now2.AddHours(bestRoute * 4),
+                TelstarPrice = (bestRoute * 3 * priceMultiplier) + recommendPriceAddition,
+                Path = path2,
+                TotalPrice = (bestRoute * 3 * priceMultiplier)
+            });
+            var now3 = DateTime.Now;
+            var cheapestRoute = dijkstra.GetNoPlaneRoute(source, destination, out var path3);
 
-            // for each route list calculate
-            // fetch time and price from competitors based on route id
-            // telstarPrice, oceanicPrice, indiaPrice
-            // telstarDuration, oceanicDuration, indiaPrice
-            // filter best, fastest and cheapest routes
-            // check if request has recommended = true and if one of the route lists is only composed of car routes
+            routes.Add(new GetRoutesResponse
+            {
+                RouteType = "cheapest",
+                DeliveryTime = now3.AddHours(bestRoute * 4),
+                TelstarPrice = (cheapestRoute * 3 * priceMultiplier) + recommendPriceAddition,
+                Path = path3,
+                TotalPrice = (cheapestRoute * 3 * priceMultiplier)
+            });
 
-
-            // response: Provides list of routes, one for each of types (best, Cheapest, Shortest) 
 
             BookingController bookingController = new BookingController();
             List<City> cityList = dbContext.Cities.ToList();
